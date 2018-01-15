@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', "HomeController@index");
+Route::get('/cart/content', "CartController@getContent");
+Route::post('/cart/add-content', "CartController@addContent");
 
 Auth::routes();
 

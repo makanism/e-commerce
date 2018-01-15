@@ -3,6 +3,11 @@
     float : right;
 }
 
+.header-cart{
+    margin :20px;
+    float :right;
+}
+
 .header-title{
     display: inline-block;
 }

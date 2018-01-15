@@ -11,7 +11,22 @@
             <div class="clearfix">
                 <h1 class="header-title">Web title</h1>
                 <div class="header-login">
+
+                    @if(auth()->check())
+                        <a href="/logout"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">Logout
+                        </a>
+                        <form id="logout-form" action="/logout" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    @else
                     <a href="/login">Login</a>
+                    @endif
+                </div>
+                <div class="header-cart">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                    <span class="badge" id="cart_count">0</span>
                 </div>
             </div>
             <nav class="navbar navbar-default">
@@ -26,5 +41,17 @@
         <div class="container">
             @yield('content')
         </div>
+        <script src="/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            function refreshCart(){
+                $.get('/cart/content',function(data){
+                    $('#cart_count').html(data.length);
+                });
+            }
+
+            refreshCart();
+        </script>
+
+        @yield('js')
     </body>
 </html>
